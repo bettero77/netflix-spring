@@ -1,0 +1,77 @@
+version: '3'
+services:
+
+  config:
+    image: hyness/spring-cloud-config-server
+    ports:
+      - 8888:8888
+
+  eureka:
+    image: taskbeez/eureka-server
+    ports:
+      - 9292:9292
+    depends_on:
+      - config
+
+  zuul:
+    image: netflixoss/zuul
+    ports:
+      - 8081:8081
+    depends_on:
+      - eureka
+
+  bus-serv:
+    build: ./
+    ports:
+      - '9090:9090'
+    depends_on:
+      - zuul
+
+  emp-serv:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - '9092:9092'
+    depends_on:
+      - zuul
+
+  postgres:
+    image: postgres:10.7-alpine
+    ports:
+      - '5432:5432'
+    network_mode: bridge
+    container_name: postgres
+    environment:
+      POSTGRES_USER: 'adminn'
+      POSTGRES_PASSWORD: '123'
+      POSTGRES_DB: 'postgres'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - '8080:80'
+    depends_on:
+      - postgres
+    network_mode: bridge
+    external_links:
+      - postgres:postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@example.com'
+      PGADMIN_DEFAULT_PASSWORD: 'admin'
+
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka:2.11-2.0.0
+    depends_on:
+      - zookeeper
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

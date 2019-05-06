@@ -1,0 +1,10 @@
+.idea
+.env
+*.jar
+*.iml
+
+build
+.gradle
+
+out
+target

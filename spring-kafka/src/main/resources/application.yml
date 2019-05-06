@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9093
+
+app:
+  topic:
+    foo: test1
+
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO
+    com.practicetask: DEBUG
