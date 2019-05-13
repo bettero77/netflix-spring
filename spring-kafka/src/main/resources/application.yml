@@ -1,13 +1,16 @@
+logging:
+  level:
+    root: ERROR
+    com.practicetask: INFO
+
+topic:
+  name:
+    message: message
+    greeting: greeting
+
 spring:
   kafka:
     bootstrap-servers: localhost:9093
 
-app:
-  topic:
-    foo: test1
-
-logging:
-  level:
-    root: WARN
-    org.springframework.web: INFO
-    com.practicetask: DEBUG
+server:
+  port: 8443

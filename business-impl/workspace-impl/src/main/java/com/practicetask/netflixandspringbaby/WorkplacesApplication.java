@@ -16,7 +16,19 @@ public class WorkplacesApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WorkplacesApplication.class, args);
+    }
 
+//    @Bean
+    public String logTest() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+            log.info("New customer successfully registered");
+            log.warn("User password will expire in two days");
+            log.error("Billing system is not available");
+
+            Thread.sleep(200);
+        }
+        return null;
     }
 
 //    @Bean

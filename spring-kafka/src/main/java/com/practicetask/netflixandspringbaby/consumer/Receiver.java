@@ -12,15 +12,13 @@ public class Receiver {
 
     private static final Logger LOG = LoggerFactory.getLogger(Receiver.class);
 
-    @KafkaListener(topics = "${app.topic.foo}")
+    @KafkaListener(topics = "${topic.name.message}")
     public void listen(@Payload String message) {
         LOG.info("received message='{}'", message);
     }
 
-    @KafkaListener(topics = "${greeting.topic.name}", containerFactory = "kafkaListenerContainerFactoryGreet")
+    @KafkaListener(topics = "${topic.name.greeting}", containerFactory = "kafkaListenerContainerFactoryGreet")
     public void listenGreeting(@Payload Greeting greeting) {
-//        LOG.info("received greeting='{}'", greeting);
-        LOG.info(greeting.toString());
+        LOG.info("received greeting='{}'", greeting.toString());
     }
-
 }

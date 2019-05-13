@@ -2,16 +2,16 @@
 #  client:
 #    serviceUrl:
 #      defaultZone: http://localhost:8282/eureka/
-spring:
-  kafka:
-    bootstrap-servers: localhost:9093
-
-app:
-  topic:
-    test: test1
-
-logging:
-  level:
-    root: ERROR
-    org.springframework.web: ERROR
-    com.memorynotfound: DEBUG
+#spring:
+#  kafka:
+#    bootstrap-servers: localhost:9093
+#
+#app:
+#  topic:
+#    test: test1
+#
+#logging:
+#  level:
+#    root: ERROR
+#    org.springframework.web: ERROR
+#    com.memorynotfound: DEBUG

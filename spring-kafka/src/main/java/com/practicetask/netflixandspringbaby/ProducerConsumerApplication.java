@@ -18,25 +18,16 @@ public class ProducerConsumerApplication {
     @Autowired
     private Sender sender;
 
-    @Value(value = "${message.topic.name}")
+    @Value(value = "${topic.name.message}")
     private String topicName;
 
-    @Value(value = "${partitioned.topic.name}")
-    private String partionedTopicName;
-
-    @Value(value = "${filtered.topic.name}")
-    private String filteredTopicName;
-
-    @Value(value = "${greeting.topic.name}")
+    @Value(value = "${topic.name.greeting}")
     private String greetingTopicName;
-
-    @Value("${app.topic.foo}")
-    private String topic;
 
     @Bean
     public String run() {
         String data = "Spring Kafka Producer and Consumer Example";
-        sender.sendBasicMessage(topic, data);
+        sender.sendBasicMessage(topicName, data);
         sender.sendGreeting(greetingTopicName, new Greeting("Hi from", "Nik"));
         return null;
     }

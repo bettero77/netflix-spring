@@ -16,16 +16,10 @@ public class KafkaTopicConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
-    @Value(value = "${message.topic.name}")
+    @Value(value = "${topic.name.message}")
     private String topicName;
 
-    @Value(value = "${partitioned.topic.name}")
-    private String partionedTopicName;
-
-    @Value(value = "${filtered.topic.name}")
-    private String filteredTopicName;
-
-    @Value(value = "${greeting.topic.name}")
+    @Value(value = "${topic.name.greeting}")
     private String greetingTopicName;
 
     @Bean
@@ -38,16 +32,6 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic topic1() {
         return new NewTopic(topicName, 1, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic2() {
-        return new NewTopic(partionedTopicName, 6, (short) 1);
-    }
-
-    @Bean
-    public NewTopic topic3() {
-        return new NewTopic(filteredTopicName, 1, (short) 1);
     }
 
     @Bean

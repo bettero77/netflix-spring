@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: dsl-kafka
+  cloud:
+    config:
+      uri: http://${CONFIG_HOST:localhost}:8888
+      failFast: false
+
+server:
+  port: 9099
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9292/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+
+#logging:
+#  level:
+#    root: ERROR
+#    com.practicetask: INFO
